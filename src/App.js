@@ -11,13 +11,16 @@ function App() {
     const result = await response.json();
     const robots = result.map((item) => {
       const { id, name, email } = item;
-      return { id, name, email };
+      const imageUrl = `https://robohash.org/${id}?size=200x200`;
+      return { id, name, email,imageUrl};
     });
     setRobots(robots);
+    console.log(robots)
   }
   useEffect(() => {
     apiFetch()
   }, []);
+  
   const filteredData =
     searchKey === ""
       ? robots
@@ -40,7 +43,7 @@ function App() {
               key={item.id}
               nameRobo={item.name}
               emailRobo={item.email}
-              imageId={item.id}
+              imageId={item.imageUrl}
             />
           );
         })}
