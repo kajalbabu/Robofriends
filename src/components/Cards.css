@@ -7,9 +7,12 @@
   border-radius: 5px;
   box-shadow: 1px 1px 5px rgb(78, 78, 78);
   height: fit-content;
+  width: 300px;
 }
 img {
   height: 300px;
+  width: 300px;
+  object-fit: cover;
 }
 .description {
   margin-bottom: 10px;
@@ -22,3 +25,11 @@ img {
 .description-body {
 width: 50%;  
 }
+/* @media(max-width:300px){
+  .card-body{
+    width: 90%;
+  }
+  img{
+    height: 90vw;
+  }
+} */

@@ -1,17 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
 import "./CardsList.css";
 
-function CardsList({ filteredData }) {
-  // const[scroll,setScroll]=useState()
-  //   useEffect(()=>{
-  //     window.addEventListener("scroll",(e) => {
-  //       const test= e.clientWidth
-  //       setScroll(test)
 
-  //     })
-  //   },[window])
-  // console.log(scroll)
+function CardsList({ filteredData }) {
+  
 
   return (
     <div className="card-list">

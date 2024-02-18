@@ -1,18 +1,32 @@
 import "./App.css";
 import Header from "./components/Header";
 import CardsList from "./components/CardsList";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function App() {
   const [searchKey, setSearchKey] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
   const [robots, setRobots] = useState([]);
+  function handleScroll(event) {
+    if (
+      window.innerHeight + document.documentElement.scrollTop ===
+      document.documentElement.offsetHeight
+    ) {
+      setCurrentPage((oldState) => oldState + 1);
+      fetchUsers(currentPage);
+    }
+  }
   useEffect(() => {
-    fetchUser();
+    window.addEventListener("scroll", handleScroll);
+    fetchUsers(currentPage);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  async function fetchUser() {
+  async function fetchUsers(page) {
     const response = await fetch(
-      "https://randomuser.me/api/?results=10&inc=id,name,email,nat,registered"
+      `https://randomuser.me/api/?page=${page}&results=9&inc=id,name,email,nat,registered`
     );
     const result = await response.json();
     const formatedResult = result.results.map((item) => {
@@ -24,7 +38,7 @@ function App() {
         registered: item.registered.date,
       };
     });
-    setRobots(formatedResult);
+    setRobots((oldState) => [...oldState, ...formatedResult]);
   }
   const filteredData =
     searchKey === ""
