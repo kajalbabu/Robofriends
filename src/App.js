@@ -1,26 +1,31 @@
 import "./App.css";
 import Header from "./components/Header";
-import Cards from "./components/Cards";
+import CardsList from "./components/CardsList";
 import { useEffect, useState } from "react";
 
 function App() {
   const [searchKey, setSearchKey] = useState("");
   const [robots, setRobots] = useState([]);
-  async function apiFetch() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/users");
-    const result = await response.json();
-    const robots = result.map((item) => {
-      const { id, name, email } = item;
-      const imageUrl = `https://robohash.org/${id}?size=200x200`;
-      return { id, name, email,imageUrl};
-    });
-    setRobots(robots);
-    console.log(robots)
-  }
   useEffect(() => {
-    apiFetch()
+    fetchUser();
   }, []);
-  
+
+  async function fetchUser() {
+    const response = await fetch(
+      "https://randomuser.me/api/?results=10&inc=id,name,email,nat,registered"
+    );
+    const result = await response.json();
+    const formatedResult = result.results.map((item) => {
+      return {
+        id: item.id.name + item.id.value,
+        name: item.name.first + " " + item.name.last,
+        email: item.email,
+        nat: item.nat,
+        registered: item.registered.date,
+      };
+    });
+    setRobots(formatedResult);
+  }
   const filteredData =
     searchKey === ""
       ? robots
@@ -36,18 +41,7 @@ function App() {
   return (
     <div className="App-body">
       <Header setSearchKey={setSearchKey} />
-      <div className="cards-main">
-        {filteredData.map((item) => {
-          return (
-            <Cards
-              key={item.id}
-              nameRobo={item.name}
-              emailRobo={item.email}
-              imageId={item.imageUrl}
-            />
-          );
-        })}
-      </div>
+      <CardsList filteredData={filteredData} />
     </div>
   );
 }

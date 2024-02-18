@@ -1,0 +1,11 @@
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  overflow-x: auto;
+  padding-top: 10px;
+  border-top: 2px solid rgb(80, 75, 75);
+  margin-bottom: 10px;
+  width: 100%;
+}
