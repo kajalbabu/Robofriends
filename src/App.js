@@ -1,21 +1,43 @@
 import "./App.css";
 import Header from "./components/Header";
 import CardsList from "./components/CardsList";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const [searchKey, setSearchKey] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [robots, setRobots] = useState([]);
+  let isFetching = false; // Flag to prevent multiple fetch requests
   function handleScroll(event) {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const scrollPercentage =
+      (scrollPosition / (documentHeight - windowHeight)) * 100;
+    if (scrollPercentage >= 50 && !isFetching) {
+      isFetching = true;
       setCurrentPage((oldState) => oldState + 1);
-      fetchUsers(currentPage);
+      fetchUsers(currentPage)
+        .then(() => {
+          isFetching = false;
+        })
+        .catch((error) => {
+          console.error("Error fetching users:", error);
+          isFetching = false;
+        });
     }
   }
+
+  //   function handleScroll(event){
+  //     if (
+  //       window.innerHeight + document.documentElement.scrollTop ===
+  //       document.documentElement.offsetHeight
+  //     ) {
+  //       setCurrentPage((oldState) => oldState + 1);
+  //       fetchUsers(currentPage);
+  //     }
+  //  }
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     fetchUsers(currentPage);

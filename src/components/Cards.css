@@ -10,9 +10,17 @@
   width: 300px;
 }
 img {
-  height: 300px;
-  width: 300px;
+  height: 200px;
+  width: 200px;
   object-fit: cover;
+}
+.name {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+.mail {
+  margin-top: 0;
+  font-size: small;
 }
 .description {
   margin-bottom: 10px;
@@ -23,13 +31,5 @@ img {
   font-weight: bold;
 }
 .description-body {
-width: 50%;  
+  width: 50%;
 }
-/* @media(max-width:300px){
-  .card-body{
-    width: 90%;
-  }
-  img{
-    height: 90vw;
-  }
-} */

@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import Cards from "./Cards";
 import "./CardsList.css";
 
-
 function CardsList({ filteredData }) {
-  
-
   return (
     <div className="card-list">
       {filteredData.map((item) => {

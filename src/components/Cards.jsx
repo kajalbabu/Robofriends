@@ -8,8 +8,8 @@ function Cards({ nameRobo, emailRobo, imageId, nat, registered }) {
   return (
     <div className="card-body">
       <img src={`https://robohash.org/${imageId}`} alt="Robot"></img>
-      <p>{nameRobo}</p>
-      <p>{emailRobo}</p>
+      <p className="name">{nameRobo}</p>
+      <p className="mail">{emailRobo}</p>
       <button className="description" onClick={handleChange}>
         {description ? "Hide" : "Show"}
       </button>
