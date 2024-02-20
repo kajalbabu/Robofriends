@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import CardsList from "./components/CardsList";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Layout from "./pages/Layout";
-import Blogs from "./pages/Blogs.js";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -76,7 +75,7 @@ function App() {
             return true;
           else return false;
         });
-        
+
   return (
     <Router>
       <div className="App-body">
@@ -84,7 +83,10 @@ function App() {
         <Routes>
           <Route path="/" element={<CardsList filteredData={filteredData} />} />
           <Route path="/layout" element={<Layout />} />
-          <Route path="/blogs" element={<Blogs />} />
+          <Route
+            path="/blogs"
+            element={<CardsList filteredData={filteredData} />}
+          />
         </Routes>
       </div>
     </Router>

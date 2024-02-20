@@ -29,7 +29,5 @@ img {
   padding: 10px;
   border-radius: 5px;
   font-weight: bold;
-}
-.description-body {
-  width: 50%;
+  cursor: pointer;
 }
