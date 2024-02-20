@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.css";
+import { Link } from "react-router-dom";
 function Header({ setSearchKey }) {
   function handleChange(e) {
     setSearchKey(e.target.value);
@@ -13,6 +14,7 @@ function Header({ setSearchKey }) {
         placeholder="Search Robot"
         onChange={handleChange}
       ></input>
+      <Link to="/blogs">go</Link>
     </div>
   );
 }

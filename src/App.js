@@ -1,6 +1,9 @@
 import "./App.css";
 import Header from "./components/Header";
 import CardsList from "./components/CardsList";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./pages/Layout";
+import Blogs from "./pages/Blogs.js";
 import { useEffect, useState } from "react";
 
 function App() {
@@ -73,12 +76,18 @@ function App() {
             return true;
           else return false;
         });
-
+        
   return (
-    <div className="App-body">
-      <Header setSearchKey={setSearchKey} />
-      <CardsList filteredData={filteredData} />
-    </div>
+    <Router>
+      <div className="App-body">
+        <Header setSearchKey={setSearchKey} />
+        <Routes>
+          <Route path="/" element={<CardsList filteredData={filteredData} />} />
+          <Route path="/layout" element={<Layout />} />
+          <Route path="/blogs" element={<Blogs />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
